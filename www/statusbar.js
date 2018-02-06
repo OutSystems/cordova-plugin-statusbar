@@ -24,6 +24,8 @@
 var exec = require('cordova/exec');
 var channel = require('cordova/channel');
 
+var IOS_11_VERSION = "11";
+
 var namedColors = {
     "black": "#000000",
     "darkGray": "#A9A9A9",
@@ -172,7 +174,7 @@ channel.deviceready.subscribe(function () {
   
     onVisibilityChange();
     
-    if(device.model.toLowerCase().includes("iphone10")){
+    if(device.version.split(".")[0].indexOf(IOS_11_VERSION) == 0){
         var viewportMetaElem = document.getElementsByTagName("meta").namedItem("viewport");
 
         if(viewportMetaElem){
