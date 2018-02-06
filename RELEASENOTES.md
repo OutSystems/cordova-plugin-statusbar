@@ -20,6 +20,34 @@
 -->
 # Release Notes
 
+### 2.4.1 (Dec 27, 2017)
+* [CB-13712](https://issues.apache.org/jira/browse/CB-13712) (iOS): fix overlaysWebView reset on rotation (#92)
+
+### 2.4.0 (Dec 15, 2017)
+* [CB-13623](https://issues.apache.org/jira/browse/CB-13623) (iOS): Remove **iOS** 6-7 code
+
+### 2.3.0 (Nov 06, 2017)
+* [CB-13476](https://issues.apache.org/jira/browse/CB-13476) (iOS): handle double size statusbar on SDK 10 for **iOS 11**
+* [CB-13394](https://issues.apache.org/jira/browse/CB-13394) (iOS): fix `iPhone X` StatusBar rendering in landscape
+* [CB-11858](https://issues.apache.org/jira/browse/CB-11858) (android) Add `StatusBarStyle` feature support for **Android M+**
+* [CB-13311](https://issues.apache.org/jira/browse/CB-13311) (iOS) Statusbar does not overlay correctly on `iPhone X`
+* [CB-13028](https://issues.apache.org/jira/browse/CB-13028) (CI) **Browser** builds on Travis and AppVeyor
+* [CB-12812](https://issues.apache.org/jira/browse/CB-12812) (browser) Fix statusbar plugin with **Browser** platform
+* [CB-12847](https://issues.apache.org/jira/browse/CB-12847) added `bugs` entry to `package.json`.
+
+### 2.2.3 (Apr 27, 2017)
+* [CB-12622](https://issues.apache.org/jira/browse/CB-12622) Added **Android 6.0** build badge to `README`
+* [CB-10879](https://issues.apache.org/jira/browse/CB-10879) Enable overlaysWebView on **Android** API 21+
+* [CB-12685](https://issues.apache.org/jira/browse/CB-12685) added `package.json` to tests folder
+
+### 2.2.2 (Feb 28, 2017)
+* [CB-12188](https://issues.apache.org/jira/browse/CB-12188) Status Bar is not changing in some specific **Android** phone (Red MI 3s Prime)
+* [CB-12369](https://issues.apache.org/jira/browse/CB-12369) Add plugin typings from `DefinitelyTyped` 
+* [CB-12363](https://issues.apache.org/jira/browse/CB-12363) Added build badges for **iOS 9.3** and **iOS 10.0** 
+* [CB-12196](https://issues.apache.org/jira/browse/CB-12196) **iOS** fix Status Bar Not Hiding
+* [CB-12141](https://issues.apache.org/jira/browse/CB-12141) **iOS** fix white app screen after camera overlay shown on iPad
+* [CB-12230](https://issues.apache.org/jira/browse/CB-12230) Removed **Windows 8.1** build badges
+
 ### 2.2.1 (Dec 07, 2016)
 * [CB-12224](https://issues.apache.org/jira/browse/CB-12224) Updated version and RELEASENOTES.md for release 2.2.1
 * [CB-10288](https://issues.apache.org/jira/browse/CB-10288) statusbar plugin interaction with iOS multitasking
@@ -75,7 +103,7 @@
 
 ### 1.0.1 (Jun 17, 2015)
 * add auto-tests for basic api
-* [CB-9180](https://issues.apache.org/jira/browse/CB-9180) Add correct supported check for Windows 8.1 desktop
+* [CB-9180](https://issues.apache.org/jira/browse/CB-9180) Add correct supported check for **Windows 8.1** desktop
 * [CB-9128](https://issues.apache.org/jira/browse/CB-9128) cordova-plugin-statusbar documentation translation: cordova-plugin-statusbar
 * fix npm md issue
 
