@@ -171,4 +171,15 @@ channel.deviceready.subscribe(function () {
     
   
     onVisibilityChange();
+    
+    if(device.model.toLowerCase().includes("iphone10")){
+        var viewportMetaElem = document.getElementsByTagName("meta").namedItem("viewport");
+
+        if(viewportMetaElem){
+            if(!viewportMetaElem.content.includes("viewport-fit")){
+                viewportMetaElem.setAttribute("content", "viewport-fit=cover," + viewportMetaElem.content)
+            }
+        }
+    }
+
 });
