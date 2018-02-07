@@ -25,6 +25,7 @@ var exec = require('cordova/exec');
 var channel = require('cordova/channel');
 
 var IOS_11_VERSION = "11";
+var IOS_PLATFORM = "ios";
 
 var namedColors = {
     "black": "#000000",
@@ -157,7 +158,7 @@ var addStatusBarDataElement = function(){
 
 var injectViewportMetaTag = function(){
 
-    if(device.version.split(".")[0].indexOf(IOS_11_VERSION) == 0){
+    if((device.platform.toLowerCase().indexOf(IOS_PLATFORM) && device.version.split(".")[0].indexOf(IOS_11_VERSION)) == 0){
         var viewportMetaElem = document.getElementsByTagName("meta").namedItem("viewport");
 
         if(viewportMetaElem){
