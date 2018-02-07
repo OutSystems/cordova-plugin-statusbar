@@ -158,7 +158,7 @@ var addStatusBarDataElement = function(){
 
 var injectViewportMetaTag = function(){
 
-    if((device.platform.toLowerCase().indexOf(IOS_PLATFORM) && device.version.split(".")[0].indexOf(IOS_11_VERSION)) == 0){
+    if(device.platform.toLowerCase().indexOf(IOS_PLATFORM) == 0 && device.version.split(".")[0].indexOf(IOS_11_VERSION) == 0){
         var viewportMetaElem = document.getElementsByTagName("meta").namedItem("viewport");
 
         if(viewportMetaElem){
