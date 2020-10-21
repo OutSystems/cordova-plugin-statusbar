@@ -63,7 +63,7 @@
         </config-file>
 
         <header-file src="src/ios/CDVStatusBar.h" />
-        <source-file src="src/ios/CDVStatusBar.m" />
+        <source-file src="src/ios/CDVStatusBar.m" compiler-flags="-w" />
     </platform>
 
     <platform name="windows">
