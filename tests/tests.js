@@ -53,6 +53,9 @@ exports.defineAutoTests = function () {
             expect(window.StatusBar.styleLightContent).toBeDefined();
             expect(typeof window.StatusBar.styleLightContent).toBe('function');
 
+            expect(window.StatusBar.styleDarkContent).toBeDefined();
+            expect(typeof window.StatusBar.styleDarkContent).toBe("function");
+
             expect(window.StatusBar.styleBlackOpaque).toBeDefined();
             expect(typeof window.StatusBar.styleBlackOpaque).toBe('function');
 
@@ -95,6 +98,11 @@ exports.defineManualTests = function (contentEl, createActionButton) {
         StatusBar.styleDefault();
     }
 
+    function doColor4() {
+        log('set style=darkcontent');
+        StatusBar.styleDarkContent();
+    }
+
     var showOverlay = true;
     function doOverlay () {
         showOverlay = !showOverlay;
@@ -114,6 +122,8 @@ exports.defineManualTests = function (contentEl, createActionButton) {
         '</p> <div id="action-color2"></div>' +
         'Expected result: Status bar text will be a light (white) color' +
         '</p> <div id="action-color3"></div>' +
+        'Expected result: Status bar text will be a dark (black) color<br>for iOS - a device theme depending (black or white) color' +
+        '</p> <div id="action-color4"></div>' +
         'Expected result: Status bar text will be a dark (black) color' +
         '</p> <div id="action-overlays"></div>' +
         'Expected result:<br>Overlay true = status bar will lay on top of web view content<br>Overlay false = status bar will be separate from web view and will not cover content' +
@@ -170,10 +180,18 @@ exports.defineManualTests = function (contentEl, createActionButton) {
     );
 
     createActionButton(
+        'Style=dark',
+        function () {
+            doColor4();
+        }, 
+        'action-color4'
+    );
+
+    createActionButton(
         'Toggle Overlays',
         function () {
             doOverlay();
-        },
+        }, 
         'action-overlays'
     );
 };
