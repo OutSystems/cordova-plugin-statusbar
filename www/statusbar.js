@@ -100,25 +100,6 @@ var StatusBar = {
     }
 };
 
-// prime it. setTimeout so that proxy gets time to init
-window.setTimeout(function () {
-    exec(
-        function (res) {
-            if (typeof res === 'object') {
-                if (res.type === 'tap') {
-                    cordova.fireWindowEvent('statusTap');
-                }
-            } else {
-                StatusBar.isVisible = res;
-            }
-        },
-        null,
-        'StatusBar',
-        '_ready',
-        []
-    );
-}, 0);
-
 var onVisibilityChange = function (){
 
     exec(checkIfStatusBarOverlaysWebview,
@@ -189,23 +170,6 @@ var injectViewportMetaTag = function(){
 
 }
 
-var injectViewportMetaTag = function(){
-
-    if (/(iPad)|(iPhone)/i.test(navigator.userAgent)) {
-        var version = navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/);
-
-        if(Array.isArray(version) && version.length > 1 && !isNaN(version[1])){
-            if(Number(version[1]) == IOS_11_VERSION || (Number(version[1]) > IOS_11_VERSION && !StatusBar.disableViewportFitiOS12)){
-                var viewportMetaElem = document.getElementsByTagName("meta").namedItem("viewport");
-
-                if(viewportMetaElem && !viewportMetaElem.content.includes("viewport-fit")) {
-                    viewportMetaElem.setAttribute("content", "viewport-fit=cover," + viewportMetaElem.content)
-                }
-            }
-        }
-    }
-
-}
 
 
 module.exports = StatusBar;
@@ -232,8 +196,6 @@ channel.deviceready.subscribe(function () {
 
 
     onVisibilityChange();
-
-    injectViewportMetaTag();
 });
 
 // Called by the native side when a configuration change

@@ -75,12 +75,7 @@ public class StatusBar extends CordovaPlugin {
                     window.getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
                 }
 
-                // Allows app to overlap cutout area from device when in landscape mode (same as iOS)
-                // More info: https://developer.android.com/reference/android/R.attr.html#windowLayoutInDisplayCutoutMode
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    window.getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
-                }
-                                // Added to override logic if plugin is installed in OutSystems Now app.
+                // Added to override logic if plugin is installed in OutSystems Now app.
                 boolean isOutSystemsNow = preferences.getBoolean("IsOutSystemsNow", false);
 
                 if(isOutSystemsNow || (doOverlay && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)){
