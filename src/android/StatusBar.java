@@ -28,6 +28,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.core.view.WindowInsetsControllerCompat;
+
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaArgs;
 import org.apache.cordova.CordovaInterface;
@@ -368,12 +370,24 @@ public class StatusBar extends CordovaPlugin {
                 };
 
                 if (Arrays.asList(darkContentStyles).contains(style.toLowerCase())) {
-                    decorView.setSystemUiVisibility(uiOptions | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
+                        decorView.setSystemUiVisibility(uiOptions | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                    WindowInsetsControllerCompat wic = new WindowInsetsControllerCompat(cordova.getActivity().getWindow(), decorView);
+                    wic.setAppearanceLightStatusBars(true);
+                    }
                     return;
                 }
 
                 if (Arrays.asList(lightContentStyles).contains(style.toLowerCase())) {
-                    decorView.setSystemUiVisibility(uiOptions & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
+                        decorView.setSystemUiVisibility(uiOptions & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                        WindowInsetsControllerCompat wic = new WindowInsetsControllerCompat(cordova.getActivity().getWindow(), decorView);
+                        wic.setAppearanceLightStatusBars(false);
+                    }
                     return;
                 }
 
