@@ -35,6 +35,7 @@
 - (void) overlaysWebView:(CDVInvokedUrlCommand*)command;
 
 - (void) styleDefault:(CDVInvokedUrlCommand*)command;
+- (void) styleDarkContent:(CDVInvokedUrlCommand*)command;
 - (void) styleLightContent:(CDVInvokedUrlCommand*)command;
 - (void) styleBlackTranslucent:(CDVInvokedUrlCommand*)command;
 - (void) styleBlackOpaque:(CDVInvokedUrlCommand*)command;
