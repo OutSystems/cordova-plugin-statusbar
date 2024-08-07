@@ -53,7 +53,10 @@ var StatusBar = {
     },
 
     styleDefault: function () {
-        // dark text ( to be used on a light background and on iOS automatically chooses light or dark content based on the user interface style)
+        /*
+        * On Android automatically chooses light or dark content based on the device theme
+        * and on iOS automatically chooses light or dark content based on the user interface style
+        */
         exec(null, null, 'StatusBar', 'styleDefault', []);
     },
 
@@ -65,16 +68,6 @@ var StatusBar = {
     styleDarkContent: function () {
         // dark text ( to be used on a light background )
         exec(null, null, 'StatusBar', 'styleDarkContent', []);
-    },
-
-    styleBlackTranslucent: function () {
-        console.warn('styleBlackTranslucent is deprecated and will be removed in next major release, use styleLightContent');
-        exec(null, null, 'StatusBar', 'styleBlackTranslucent', []);
-    },
-
-    styleBlackOpaque: function () {
-        console.warn('styleBlackOpaque is deprecated and will be removed in next major release, use styleLightContent');
-        exec(null, null, 'StatusBar', 'styleBlackOpaque', []);
     },
 
     backgroundColorByName: function (colorname) {

@@ -25,7 +25,8 @@ interface StatusBar {
     overlaysWebView(isOverlay: boolean): void;
 
     /**
-    * Use the darkContent statusbar (dark text, for light backgrounds and on iOS automatically chooses light or dark content based on the user interface style)
+    * On Android automatically chooses light or dark content based on the device theme
+    * and on iOS automatically chooses light or dark content based on the user interface style
     */
     styleDefault(): void;
 
@@ -38,16 +39,6 @@ interface StatusBar {
     * Use the lightContent statusbar (light text, for dark backgrounds).
     */
     styleLightContent(): void;
-
-    /**
-    * Use the blackTranslucent statusbar (light text, for dark backgrounds).
-    */
-    styleBlackTranslucent(): void;
-
-    /**
-    * Use the blackOpaque statusbar (light text, for dark backgrounds).
-    */
-    styleBlackOpaque(): void;
 
     /**
     * On iOS 7, when you set StatusBar.statusBarOverlaysWebView to false,

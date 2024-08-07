@@ -44,9 +44,6 @@ exports.defineAutoTests = function () {
         });
 
         it('statusbar.spec.4 should have set style methods', function () {
-            expect(window.StatusBar.styleBlackTranslucent).toBeDefined();
-            expect(typeof window.StatusBar.styleBlackTranslucent).toBe('function');
-
             expect(window.StatusBar.styleDefault).toBeDefined();
             expect(typeof window.StatusBar.styleDefault).toBe('function');
 
@@ -55,9 +52,6 @@ exports.defineAutoTests = function () {
 
             expect(window.StatusBar.styleLightContent).toBeDefined();
             expect(typeof window.StatusBar.styleLightContent).toBe('function');
-
-            expect(window.StatusBar.styleBlackOpaque).toBeDefined();
-            expect(typeof window.StatusBar.styleBlackOpaque).toBe('function');
 
             expect(window.StatusBar.overlaysWebView).toBeDefined();
             expect(typeof window.StatusBar.overlaysWebView).toBe('function');
@@ -88,11 +82,6 @@ exports.defineManualTests = function (contentEl, createActionButton) {
         StatusBar.backgroundColorByName('red');
     }
 
-    function doColor2 () {
-        log('set style=translucent black');
-        StatusBar.styleBlackTranslucent();
-    }
-
     function doColor3 () {
         log('set style=default');
         StatusBar.styleDefault();
@@ -119,8 +108,6 @@ exports.defineManualTests = function (contentEl, createActionButton) {
         'Expected result: Status bar will be visible' +
         '</p> <div id="action-hide"></div>' +
         'Expected result: Status bar will be hidden' +
-        '</p> <div id="action-color2"></div>' +
-        'Expected result: Status bar text will be a light (white) color' +
         '</p> <div id="action-color3"></div>' +
         'Expected result: Status bar text will be a dark (black) color<br>for iOS - a device theme depending (black or white) color' +
         '</p> <div id="action-color4"></div>' +
@@ -161,14 +148,6 @@ exports.defineManualTests = function (contentEl, createActionButton) {
             doColor1();
         },
         'action-color1'
-    );
-
-    createActionButton(
-        'Style=translucent black',
-        function () {
-            doColor2();
-        },
-        'action-color2'
     );
 
     createActionButton(

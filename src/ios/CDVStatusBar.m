@@ -144,9 +144,6 @@ static NSString* const StatusBarStaticChannel = @"StatusBarStaticChannel";
     setting  = @"StatusBarStyle";
     if ([self settingForKey:setting]) {
         NSString * styleSetting = [self settingForKey:setting];
-        if ([styleSetting isEqualToString:@"blacktranslucent"] || [styleSetting isEqualToString:@"blackopaque"]) {
-            NSLog(@"%@ is deprecated and will be removed in next major release, use lightcontent", styleSetting);
-        }
         [self setStatusBarStyle:styleSetting];
     }
 
@@ -309,7 +306,7 @@ static NSString* const StatusBarStaticChannel = @"StatusBarStaticChannel";
 
 - (void) setStatusBarStyle:(NSString*)statusBarStyle
 {
-    // default, lightContent, blackTranslucent, blackOpaque
+    // default, lightContent, darkContent
     NSString* lcStatusBarStyle = [statusBarStyle lowercaseString];
 
     if ([lcStatusBarStyle isEqualToString:@"default"]) {
@@ -318,10 +315,6 @@ static NSString* const StatusBarStaticChannel = @"StatusBarStaticChannel";
         [self styleLightContent:nil];
     } else if ([lcStatusBarStyle isEqualToString:@"darkcontent"]) {
         [self styleDarkContent:nil];
-    } else if ([lcStatusBarStyle isEqualToString:@"blacktranslucent"]) {
-        [self styleBlackTranslucent:nil];
-    } else if ([lcStatusBarStyle isEqualToString:@"blackopaque"]) {
-        [self styleBlackOpaque:nil];
     }
 }
 
@@ -336,16 +329,6 @@ static NSString* const StatusBarStaticChannel = @"StatusBarStaticChannel";
 }
 
 - (void) styleLightContent:(CDVInvokedUrlCommand*)command
-{
-    [self setStyleForStatusBar:UIStatusBarStyleLightContent];
-}
-
-- (void) styleBlackTranslucent:(CDVInvokedUrlCommand*)command
-{
-    [self setStyleForStatusBar:UIStatusBarStyleLightContent];
-}
-
-- (void) styleBlackOpaque:(CDVInvokedUrlCommand*)command
 {
     [self setStyleForStatusBar:UIStatusBarStyleLightContent];
 }
