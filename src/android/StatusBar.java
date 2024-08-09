@@ -55,11 +55,13 @@ public class StatusBar extends CordovaPlugin {
     private static final String ACTION_OVERLAYS_WEB_VIEW = "overlaysWebView";
     private static final String ACTION_STYLE_DEFAULT = "styleDefault";
     private static final String ACTION_STYLE_LIGHT_CONTENT = "styleLightContent";
+    private static final String ACTION_STYLE_DARK_CONTENT = "styleDarkContent";
     private static final String ACTION_IS_OVERLAYS_WEB_VIEW = "isStatusBarOverlayingWebview";
     private static final String ACTION_GET_HEIGHT = "getStatusBarHeight";
 
     private static final String STYLE_DEFAULT = "default";
     private static final String STYLE_LIGHT_CONTENT = "lightcontent";
+    private static final String STYLE_DARK_CONTENT = "darkcontent";
 
     private AppCompatActivity activity;
     private Window window;
@@ -213,6 +215,10 @@ public class StatusBar extends CordovaPlugin {
                 activity.runOnUiThread(() -> setStatusBarStyle(STYLE_LIGHT_CONTENT));
                 return true;
 
+            case ACTION_STYLE_DARK_CONTENT:
+                activity.runOnUiThread(() -> setStatusBarStyle(STYLE_DARK_CONTENT));
+                return true;
+
             case ACTION_IS_OVERLAYS_WEB_VIEW:
                 boolean isVisible = (window.getAttributes().flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) == 0;
                 callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, doOverlay && isVisible));
@@ -279,7 +285,7 @@ public class StatusBar extends CordovaPlugin {
             View decorView = window.getDecorView();
             WindowInsetsControllerCompat windowInsetsControllerCompat = WindowCompat.getInsetsController(window, decorView);
 
-            if (style.equals(STYLE_DEFAULT)) {
+            if (style.equals(STYLE_DEFAULT) || style.equals(STYLE_DARK_CONTENT)) {
                 windowInsetsControllerCompat.setAppearanceLightStatusBars(true);
             } else if (style.equals(STYLE_LIGHT_CONTENT)) {
                 windowInsetsControllerCompat.setAppearanceLightStatusBars(false);

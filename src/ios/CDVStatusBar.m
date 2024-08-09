@@ -309,28 +309,31 @@ static NSString* const StatusBarStaticChannel = @"StatusBarStaticChannel";
 
 - (void) setStatusBarStyle:(NSString*)statusBarStyle
 {
-    // default, lightContent
+    // default, lightContent or darkcontent
     NSString* lcStatusBarStyle = [statusBarStyle lowercaseString];
 
     if ([lcStatusBarStyle isEqualToString:@"default"]) {
         [self styleDefault:nil];
     } else if ([lcStatusBarStyle isEqualToString:@"lightcontent"]) {
         [self styleLightContent:nil];
+    } else if ([lcStatusBarStyle isEqualToString:@"darkcontent"]) {
+        [self styleDarkContent:nil];
     }
 }
 
 - (void) styleDefault:(CDVInvokedUrlCommand*)command
 {
-    if (@available(iOS 13.0, *)) {
-        [self setStyleForStatusBar:UIStatusBarStyleDarkContent];
-    } else {
-        [self setStyleForStatusBar:UIStatusBarStyleDefault];
-    }
+    [self setStyleForStatusBar:UIStatusBarStyleDefault];
 }
 
 - (void) styleLightContent:(CDVInvokedUrlCommand*)command
 {
     [self setStyleForStatusBar:UIStatusBarStyleLightContent];
+}
+
+- (void) styleDarkContent:(CDVInvokedUrlCommand*)command
+{
+    [self setStyleForStatusBar:UIStatusBarStyleDarkContent];
 }
 
 - (void) backgroundColorByName:(CDVInvokedUrlCommand*)command
