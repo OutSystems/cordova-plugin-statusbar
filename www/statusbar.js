@@ -53,7 +53,8 @@ var StatusBar = {
     },
 
     styleDefault: function () {
-        // dark text ( to be used on a light background and on iOS automatically chooses light or dark content based on the user interface style)
+        // Automatically chooses light or dark content based on the device theme on Android or
+        // automatically selects an appearance and updates it dynamically to maintain contrast with the content below it on iOS.
         exec(null, null, 'StatusBar', 'styleDefault', []);
     },
 

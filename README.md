@@ -162,8 +162,7 @@ Quick Example
 StatusBar.styleDefault
 =================
 
-Use the default statusbar (dark text, for light backgrounds).
-For iOS - Automatically chooses light or dark content based on the user interface style.
+Automatically chooses light or dark content based on the device theme on Android or automatically selects an appearance and updates it dynamically to maintain contrast with the content below it on iOS.
 
     StatusBar.styleDefault();
 

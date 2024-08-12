@@ -46,8 +46,6 @@ public class StatusBar extends CordovaPlugin {
     private static final String TAG = "StatusBar";
     private static final String CORDOVA_STATIC_CHANNEL = "StatusBarStaticChannel";
 
-    private boolean doOverlay;
-
     private static final String ACTION_HIDE = "hide";
     private static final String ACTION_SHOW = "show";
     private static final String ACTION_READY = "_ready";
@@ -62,6 +60,9 @@ public class StatusBar extends CordovaPlugin {
     private static final String STYLE_DEFAULT = "default";
     private static final String STYLE_LIGHT_CONTENT = "lightcontent";
     private static final String STYLE_DARK_CONTENT = "darkcontent";
+
+    private boolean doOverlay;
+    private String currentStyle = "";
 
     private AppCompatActivity activity;
     private Window window;
@@ -116,14 +117,11 @@ public class StatusBar extends CordovaPlugin {
                 } else {
                     // Read 'StatusBarBackgroundColor' from config.xml, default is #000000.
                     setStatusBarBackgroundColor(preferences.getString("StatusBarBackgroundColor", "#000000"));
-
-                    // Read 'StatusBarStyle' from config.xml, default is 'lightcontent'.
-                    String styleSetting = preferences.getString("StatusBarStyle", "lightcontent");
-                    if (styleSetting.equalsIgnoreCase("blacktranslucent") || styleSetting.equalsIgnoreCase("blackopaque")) {
-                        LOG.w(TAG, styleSetting +" is deprecated and will be removed in next major release, use lightcontent");
-                    }
-                    setStatusBarStyle(styleSetting);
                 }
+
+                // Read 'StatusBarStyle' from config.xml, default is 'default'.
+                String styleSetting = preferences.getString("StatusBarStyle", "default");
+                setStatusBarStyle(styleSetting);
             }
         });
     }
@@ -268,10 +266,9 @@ public class StatusBar extends CordovaPlugin {
     }
 
     private void setStatusBarTransparent(final boolean isTransparent) {
-        final Window window = cordova.getActivity().getWindow();
         int visibility = isTransparent
-            ? View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            : View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_VISIBLE;
+                ? View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                : View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_VISIBLE;
 
         window.getDecorView().setSystemUiVisibility(visibility);
 
@@ -280,17 +277,21 @@ public class StatusBar extends CordovaPlugin {
         }
     }
 
-    private void setStatusBarStyle(final String style) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !style.isEmpty()) {
+    private void setStatusBarStyle(String style) {
+        if (!style.isEmpty()) {
+            this.currentStyle = style;
             View decorView = window.getDecorView();
             WindowInsetsControllerCompat windowInsetsControllerCompat = WindowCompat.getInsetsController(window, decorView);
 
-            if (style.equals(STYLE_DEFAULT) || style.equals(STYLE_DARK_CONTENT)) {
+            if (style.equals(STYLE_DEFAULT)) {
+                style = getStyleFromDeviceTheme();
+            }
+            if (style.equals(STYLE_DARK_CONTENT)) {
                 windowInsetsControllerCompat.setAppearanceLightStatusBars(true);
             } else if (style.equals(STYLE_LIGHT_CONTENT)) {
                 windowInsetsControllerCompat.setAppearanceLightStatusBars(false);
             } else {
-                LOG.e(TAG, "Invalid style, must be either 'default' or 'lightcontent'");
+                LOG.e(TAG, "Invalid style, must be either 'default', 'lightcontent' or 'darkcontent'");
             }
         }
     }
@@ -298,9 +299,23 @@ public class StatusBar extends CordovaPlugin {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        if (this.currentStyle.equals(STYLE_DEFAULT))
+            setStatusBarStyle(STYLE_DEFAULT);
         PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
         pluginResult.setKeepCallback(true);
         webView.sendPluginResult(pluginResult, CORDOVA_STATIC_CHANNEL);
     }
 
+    private String getStyleFromDeviceTheme() {
+        int nightModeFlags = cordova.getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+            default:
+                return STYLE_LIGHT_CONTENT;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                return STYLE_DARK_CONTENT;
+        }
+    }
 }
