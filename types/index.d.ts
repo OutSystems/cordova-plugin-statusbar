@@ -25,9 +25,14 @@ interface StatusBar {
     overlaysWebView(isOverlay: boolean): void;
 
     /**
-    * Use the default statusbar (dark text, for light backgrounds).
+    * Use the darkContent statusbar (dark text, for light backgrounds and on iOS automatically chooses light or dark content based on the user interface style)
     */
     styleDefault(): void;
+
+    /**
+    * Use the darkContent statusbar (dark text, for light backgrounds).
+    */
+    styleDarkContent(): void;
 
     /**
     * Use the lightContent statusbar (light text, for dark backgrounds).

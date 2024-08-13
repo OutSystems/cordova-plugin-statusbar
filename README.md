@@ -55,7 +55,7 @@ Preferences
 
         <preference name="StatusBarBackgroundColor" value="#000000" />
 
-- __StatusBarStyle__ (status bar style, defaults to lightcontent). Set the status bar style (e.g. text color). Available options: `default`, `lightcontent`.
+- __StatusBarStyle__ (status bar style). Set the status bar style (e.g. text color). Available options: `default`, `lightcontent` and `darkcontent`.
 
         <preference name="StatusBarStyle" value="lightcontent" />
 
@@ -118,6 +118,7 @@ Although in the global scope, it is not available until after the `deviceready` 
 - StatusBar.overlaysWebView
 - StatusBar.styleDefault
 - StatusBar.styleLightContent
+- StatusBar.styleDarkContent
 - StatusBar.backgroundColorByName
 - StatusBar.backgroundColorByHexString
 - StatusBar.hide
@@ -161,7 +162,7 @@ Quick Example
 StatusBar.styleDefault
 =================
 
-Use the default statusbar (dark text, for light backgrounds).
+Automatically chooses light or dark content based on the device theme on Android or automatically selects an appearance and updates it dynamically to maintain contrast with the content below it on iOS.
 
     StatusBar.styleDefault();
 
@@ -178,6 +179,20 @@ StatusBar.styleLightContent
 Use the lightContent statusbar (light text, for dark backgrounds).
 
     StatusBar.styleLightContent();
+
+
+Supported Platforms
+-------------------
+
+- iOS
+- Android 6+
+
+StatusBar.styleDarkContent
+=================
+
+Use the darkContent statusbar (dark text, for light backgrounds).
+
+    StatusBar.styleDarkContent();
 
 
 Supported Platforms
